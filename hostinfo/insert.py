@@ -61,5 +61,5 @@ def insertHosts(request):
     except Exception,e:
         return response('hostinfo/host_form.html', {"error":e})
 
-    return response('success.html', {"info":"insert data is done."})
+    return response('hostinfo/host_form.html', {"status":"success insert one record"})
 
