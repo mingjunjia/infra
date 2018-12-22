@@ -1,37 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>show data</title>
-	<meta charset="utf-8">
-	<style type="text/css">
-		th{ color: blue }
-		table, tr, th, td{
-			border: 1px solid #429fff;
-			font-family: Arial;
-			border-collapse: collapse;
-		}
-	</style>
-</head>
-<body>
-<table>
-	<tr>
-		<th>主机名</th>
-		<th>业务IP</th>
-		<th>承载网IP</th>
-		<th>管理IP</th>
-		<th>存储IP</th>
-		<th>操作系统</th>
-		<th>机器类型</th>
-		<th>机器状态</th>
-		<th>所属项目</th>
-	</tr>
-	{% for row in row_list %}
+{% extends base.html}
+
+{% block main %}
+	<li> <a href="main">主页</a> </li>
+{% endblock %}
+
+{% block mainbody %}
+	<table>
 		<tr>
-			{% for field in row %}
-				<td>{{ field }}</td>
-			{% endfor %}
+			<th>主机名</th>
+			<th>业务IP</th>
+			<th>承载网IP</th>
+			<th>管理IP</th>
+			<th>存储IP</th>
+			<th>操作系统</th>
+			<th>机器类型</th>
+			<th>机器状态</th>
+			<th>所属项目</th>
 		</tr>
-	{% endfor %}
-</table>
-</body>
-</html>
+		{% for row in row_list %}
+			<tr>
+				{% for field in row %}
+					<td>{{ field }}</td>
+				{% endfor %}
+			</tr>
+		{% endfor %}
+	</table>
+	</body>
+	</html>
+{% endblock %}
