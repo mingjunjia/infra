@@ -67,5 +67,8 @@ body{
 			border: 1px solid #00BFFF;
 			font-family: Arial;
 			border-collapse: collapse;
-			padding: 20px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			padding-left: 10px;
+			padding-right: 10px;
 }
