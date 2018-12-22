@@ -63,8 +63,9 @@ body{
 	text-decoration: underline;
 }
 
-#maintable tr, ,#maintable th, #maintable td{
+#maintable tr, #maintable th, #maintable td{
 			border: 1px solid #00BFFF;
 			font-family: Arial;
 			border-collapse: collapse;
+			padding: 20px;
 }
