@@ -14,6 +14,7 @@ body{
 	text-align: center;
 	background-color: #a2d9ff;
 	padding: 10px;
+	font-size: 30px;
 }
 
 #left_bk{
@@ -30,6 +31,7 @@ body{
 #main{
 	padding-left: 10px;
 	padding-top: 15px;
+	font-size: 20px;
 }
 
 #links {
@@ -61,7 +63,7 @@ body{
 	text-decoration: underline;
 }
 
-table, tr, th, td{
+#maintable tr, ,#maintable th, #maintable td{
 			border: 1px solid #00BFFF;
 			font-family: Arial;
 			border-collapse: collapse;

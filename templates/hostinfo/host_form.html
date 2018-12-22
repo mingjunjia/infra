@@ -1,45 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>insert data into mysql</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block css %}
+    <link href="{% static 'style/host_form.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block mainbody %}
     {% if error %}
          <h2 style="color: red">{{ error }}</h2>
     {%  endif %}
     {% if status %}
         <p style="color: red">{{ status }}</p>
     {% endif %}
-    <h3>insert host info</h3>
-    <h4>please stuff follow form</h4>
-    <form method="post" action="insert_hostinfo">
+    <h4>请输入主机信息</h4>
+    <form id="form1" method="post" action="insert_hostinfo">
             {% csrf_token %}
+        <table>
+        <tr>
+            <td class="show_name"> Host Name: </td> 
+            <td> <input class="left" type="text" name="host_name"></td>
+            <td class="show_name">业务IP: </td> 
+            <td><input class="right" type="text" name="work_ip"></td>
+        </tr>
+        <tr>
+            <td class="show_name">管理IP: </td>
+            <td><input class="left" type="text" name="manage_ip"></td>
+            <td class="show_name">存储IP: </td> 
+            <td><input class="right" type="text" name="store_ip"></td>
+        </tr>
+        <tr>
+            <td class="show_name">承载网IP:   </td>
+            <td> <input class="left" type="text" name="map_ip"></td>
+            <td class="show_name"> 系统类型: </td>
+            <td> <input class="right" type="text" name="os" value="Oracle Linux 7.3"></td>
+        </tr>
+        <tr>
+             <td class="show_name"> 所属项目: </td>
+             <td> <input class="left" type="text" name="in_proj" value="中国移动ERP集中化-综合查询CQP"></td>
+        </tr>
+        <tr>
+            <td class="show_name"> 主机类型: </td>
+            <td>
+                <select name="machine_type">
+                    <option value="physics" selected="selected" >物理机</option>
+                    <option value="virtual">虚拟机</option>
+                </select>
+            </td>
+            <td class="show_name"> 机器状态: </td>
+            <td>
+                <select name="status">
+                    <option value="started" selected="selected" >已启动</option>
+                    <option value="stop">已关机</option>
+                    <option value="no_exist">不存在</option>
+                </select>
+            </td>
+             
+        </tr>
+        </table>
+       
         <p>
-            Host Name: <input type="text" name="host_name">   
-            业务IP: <input type="text" name="work_ip">
-        </p>
-        <p>
-            管理IP: <input type="text" name="manage_ip">
-            存储IP: <input type="text" name="store_ip">
-        </p>
-        <p>
-            承载网IP: <input type="text" name="map_ip">
-            系统类型: <input type="text" name="os" value="Oracle Linux 7.3">
-        </p>
-        <p>
-            机器类型: <br> 物理机: <input type="radio" name="machine_type" value="physics"> 虚拟机: <input type="radio" name="machine_type" value="virtual">
-        </p>
-        <p>
-            所属项目: <input type="text" name="in_proj" value="中国移动ERP集中化-综合查询CQP"><br>
-            机器状态 <br> 已启动: <input type="radio" name="status" value="started"><br>
-            已关机: <input type="radio" name="status" value="stop"><br>
-            不存在: <input type="radio" name="status" value="no_exist">
-        </p>
-        <p>
-            <input type="submit" value="Submit">
+            <input style="margin-left: 35px; font-size: 20px" type="submit" value="Submit">
         </p>
     </form>
     
-</body>
-</html>
+{% endblock %}

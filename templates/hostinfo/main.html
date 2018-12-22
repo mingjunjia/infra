@@ -1,11 +1,8 @@
 {% extends "base.html" %}
 
-{% block main %}
-	<li> <a href="main">主页</a> </li>
-{% endblock %}
 
 {% block mainbody %}
-	<table>
+	<table id="maintable">
 		<tr>
 			<th>主机名</th>
 			<th>业务IP</th>
@@ -26,5 +23,4 @@
 		{% endfor %}
 	</table>
 	</body>
-	</html>
 {% endblock %}
