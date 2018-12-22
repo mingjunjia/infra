@@ -13,7 +13,9 @@
 	</div>
 	<div id="left_bk">
 		<ul id="links">
-			<li> <a href="#">主页</a> </li>
+			{% block main %}
+				<li> <a href="#">主页</a> </li>
+			{% endblock %}
 			<li> <a href="#">网络设备</a> </li>
 			<li> <a href="#">存储设备</a> </li>
 			<li> <a href="#">防火墙</a> </li>
@@ -22,7 +24,9 @@
 	</div>
 
 	<div id="main">
-		asajsasasakksaksaksak
+		{% block mainbody %}
+			<p>base template</p>
+		{% endblock %}
 		
 	</div>
 			
