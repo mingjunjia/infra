@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from hostinfo import insert
+from hostinfo import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^insert_hostinfo/', insert.insertHosts),
+    url(r'^main/', views.showMain),
 ]
