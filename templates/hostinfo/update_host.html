@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'style/host_form.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block mainbody %}
+    {% if error %}
+         <h2 style="color: red">{{ error }}</h2>
+    {%  endif %}
+    {% if status %}
+        <p style="color: red">{{ status }}</p>
+    {% endif %}
+    <h4>修改主机信息或删除主机</h4>
+   <form id="change_host_form" method="post" action="insert_hostinfo">
+            {% csrf_token %}
+        <table>
+        <tr>
+            <td class="show_name"> Host Name: </td> 
+            <td> <input class="left" type="text" name="host_name"></td>
+            <td class="show_name">业务IP: </td> 
+            <td><input class="right" type="text" name="work_ip"></td>
+        </tr>
+        <tr>
+            <td class="show_name">管理IP: </td>
+            <td><input class="left" type="text" name="manage_ip"></td>
+            <td class="show_name">存储IP: </td> 
+            <td><input class="right" type="text" name="store_ip"></td>
+        </tr>
+        <tr>
+            <td class="show_name">承载网IP:   </td>
+            <td> <input class="left" type="text" name="map_ip"></td>
+            <td class="show_name"> 系统类型: </td>
+            <td> <input class="right" type="text" name="os" value="Oracle Linux 7.3"></td>
+        </tr>
+        <tr>
+             <td class="show_name"> 所属项目: </td>
+             <td> <input class="left" type="text" name="in_proj" value="中国移动ERP集中化-综合查询CQP"></td>
+        </tr>
+        <tr>
+            <td class="show_name"> 主机类型: </td>
+            <td>
+                <select name="machine_type">
+                    <option value="physics" selected="selected" >物理机</option>
+                    <option value="virtual">虚拟机</option>
+                </select>
+            </td>
+            <td class="show_name"> 机器状态: </td>
+            <td>
+                <select name="status">
+                    <option value="started" selected="selected" >已启动</option>
+                    <option value="stop">已关机</option>
+                    <option value="no_exist">不存在</option>
+                </select>
+            </td>
+             
+        </tr>
+        </table>
+       
+        <input type="button" class="change_host_btn" value="更新主机数据" onclick="update_host()">
+        <input type="button" class="change_host_btn" value="删除主机" onclick="delete_host()">
+
+    </form>
+
+    <script type="text/javascript">
+
+    	var change_host_form = document.getElementById("change_host_form");
+		function update_host(){
+    		//alert( "asas");
+    		change_host_form.action = "hostinfo/update";
+    		change_host_form.submit();
+    	};
+    	function delete_host(){
+    		change_host_form.action="hostinfo/delete";
+    		change_host_form.submit();
+    	}
+	</script>
+    
+    
+{% endblock %}
