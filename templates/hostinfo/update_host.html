@@ -13,7 +13,7 @@
         <p style="color: red">{{ status }}</p>
     {% endif %}
     <h4>修改主机信息或删除主机</h4>
-   <form id="change_host_form" method="post" action="/hostinfo/update">
+   <form id="change_host_form" method="post" action="/hostinfo/update/">
             {% csrf_token %}
         <table>
         <tr>
@@ -68,11 +68,11 @@
     	var change_host_form = document.getElementById("change_host_form");
 		function update_host(){
     		//alert( "asas");
-    		change_host_form.action = "/hostinfo/update";
+    		change_host_form.action = "/hostinfo/update/";
     		change_host_form.submit();
     	};
     	function delete_host(){
-    		change_host_form.action="/hostinfo/delete";
+    		change_host_form.action="/hostinfo/delete/";
     		change_host_form.submit();
     	}
 	</script>
