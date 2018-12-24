@@ -63,6 +63,10 @@ body{
 	text-decoration: underline;
 }
 
+#maintable{
+	clear: both;
+}
+
 #maintable tr, #maintable th, #maintable td{
 			border: 1px solid #00BFFF;
 			font-family: Arial;
@@ -78,8 +82,10 @@ body{
 	float: left;
 	padding-left: 20px;
 	padding-right: 20px;
-	font-size: 15px;
+	font-size: 20px;
 	list-style: none;
+	font-weight: 500;
+
 }
 
 #change_host_ul .change_host_li a:link{
