@@ -81,9 +81,7 @@ body{
 	font-size: 15px;
 	list-style: none;
 }
-#change_host_ul .change_host_li a{
-	
-}
+
 #change_host_ul .change_host_li a:link{
 	color: #005799;
 	text-decoration: none;
@@ -93,6 +91,6 @@ body{
 	text-decoration: none;
 }
 #change_host_ul .change_host_li a:hover{
-	color: #ffff0015;
+	color: #a9c73c;
 	text-decoration: underline;
 }
