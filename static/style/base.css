@@ -72,3 +72,11 @@ body{
 			padding-left: 10px;
 			padding-right: 10px;
 }
+
+#change_host_ul .change_host_li{
+	float: left;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 15px;
+	list-style: none;
+}
