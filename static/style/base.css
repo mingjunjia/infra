@@ -59,7 +59,7 @@ body{
 	text-decoration: none;
 }
 #links a:hover{
-	color: #ffff00;
+	color: #ffff0015;
 	text-decoration: underline;
 }
 
@@ -73,10 +73,26 @@ body{
 			padding-right: 10px;
 }
 
+/* 主页上的新增，删除，修改主机的三个按钮 */
 #change_host_ul .change_host_li{
 	float: left;
 	padding-left: 20px;
 	padding-right: 20px;
 	font-size: 15px;
 	list-style: none;
+}
+#change_host_ul .change_host_li a{
+	
+}
+#change_host_ul .change_host_li a:link{
+	color: #005799;
+	text-decoration: none;
+}
+#change_host_ul .change_host_li a:visited{
+	color: #000000;
+	text-decoration: none;
+}
+#change_host_ul .change_host_li a:hover{
+	color: #ffff0015;
+	text-decoration: underline;
 }
