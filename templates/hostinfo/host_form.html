@@ -13,7 +13,7 @@
         <p style="color: red">{{ status }}</p>
     {% endif %}
     <h4>请输入主机信息</h4>
-    <form id="form1" method="post" action="insert_hostinfo">
+    <form id="form1" method="post" action="/hostinfo/insert">
             {% csrf_token %}
         <table>
         <tr>
