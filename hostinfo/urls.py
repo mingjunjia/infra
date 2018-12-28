@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'insert/', insert.insertHosts),
     url(r'main/', views.showMain),
     url(r'update/', views.updateHost),
+    url(r'delete/', views.deleteHost),
+    url(r'detail/', views.showHost),
+    url(r'addaccount/', views.addAccount),
 ]

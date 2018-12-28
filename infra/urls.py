@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hostinfo/', include("hostinfo.urls")),
     url(r'^main/', views.showMain),
+    
 ]

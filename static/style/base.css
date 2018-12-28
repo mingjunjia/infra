@@ -31,7 +31,7 @@ body{
 #main{
 	padding-left: 10px;
 	padding-top: 15px;
-	font-size: 20px;
+	font-size: 17px;
 }
 
 #links {
@@ -63,18 +63,23 @@ body{
 	text-decoration: underline;
 }
 
+/* show main table */
+
 #maintable{
-	clear: both;
+	font-family: Arial;
+	margin: 0px;
+	padding: 0px;
 }
 
-#maintable tr, #maintable th, #maintable td{
+/* #maintable tr,  */
+#maintable th, #maintable td{
 			border: 1px solid #00BFFF;
-			font-family: Arial;
 			border-collapse: collapse;
-			padding-top: 5px;
-			padding-bottom: 5px;
+			padding-top: 3px;
+			padding-bottom: 2px;
 			padding-left: 10px;
 			padding-right: 10px;
+			margin: 0px;
 }
 
 /* 主页上的新增，删除，修改主机的三个按钮 */
@@ -84,8 +89,13 @@ body{
 	padding-right: 20px;
 	font-size: 20px;
 	list-style: none;
-	font-weight: 500;
+	font-weight: bold;
 
+}
+#change_host_ul{
+	width: 100%;
+	text-align: center;
+	padding-bottom: 20px;
 }
 
 #change_host_ul .change_host_li a:link{

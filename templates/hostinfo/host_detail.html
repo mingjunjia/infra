@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block mainbody %}
+    <ul id="host_detail" >
+        <li class="common">Host Name: {{ host_name }}</li>
+        <li class="common"> Map IP: {{ map_ip }}</li>
+        <li class="common">Work IP: {{ work_ip }}</li>
+        <li class="common">Store IP: {{ store_ip }}</li>
+        <li class="common">Manage IP: {{ manage_ip }}</li>
+        <li class="common">OS : {{ os }}</li>
+        <li class="common">Machine Type: {{ machine_type }}</li>
+        <li class="common">Machine Status: {{ status }}</li>
+        <li class="common"> Project: {{ in_proj }}</li>
+    </ul>
+
+    
+{% endblock %}

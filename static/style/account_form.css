@@ -1,0 +1,49 @@
+
+/* for add_account_form.html */
+
+#quik_jump{
+    margin: 50px;
+}
+
+#quik_jump li{
+    float: left;
+    list-style: none;
+    font-size: 25px;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+#quik_jump li a:link{
+    color: #005799;
+    text-decoration: none;
+}
+#quik_jump li a:visited{
+    color: #000000;
+    text-decoration: none;
+}
+#quik_jump li a:hover{
+    color: #a9c73c;
+    text-decoration: underline;
+}
+
+
+
+.show_name{
+    text-align: right;
+}
+#addaccount_form td{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding: 10px;
+}
+#addaccount_form tr{
+    height: 40px;
+}
+#addaccount_form td input{
+    width: 300px;
+    height: 25px;
+}
+#addaccount_form td select{
+    width: 305px;
+    height: 30px;
+    padding: 0px;
+}

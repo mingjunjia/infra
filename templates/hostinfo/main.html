@@ -3,7 +3,7 @@
 
 {% block mainbody %}
 	<ul id="change_host_ul">
-		<li class="change_host_li"><a href="/hostinfo/inserty/">新增主机</a> </li>
+		<li class="change_host_li"><a href="/hostinfo/insert/">新增主机</a> </li>
 		<li class="change_host_li"><a href="/hostinfo/delete/">删除主机</a> </li>
 		<li class="change_host_li"><a href="/hostinfo/update/">修改主机</a> </li>
 
@@ -23,10 +23,21 @@
 		{% for row in row_list %}
 			<tr>
 				{% for field in row %}
-					<td>{{ field }}</td>
+					<td ondblclick="show_detail(this)" >{{ field }}</td>
 				{% endfor %}
 			</tr>
 		{% endfor %}
 	</table>
-	</body>
+
+	<script>
+		function show_detail(self){
+			if( self.parentElement.firstElementChild == self ){
+				// alert(self.innerHTML)
+				window.location = "/hostinfo/detail?host_name="+ self.innerHTML
+			}
+			
+		}
+		// document.getElementById("maintable").parentElement.firstElementChild
+	</script>
+
 {% endblock %}
