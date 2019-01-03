@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+<!-- the form for add account and password -->
+{% block css %}
+    {% load staticfiles %}
+    <link href="{% static 'style/account_form.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+{% block mainbody %}
+
+<ul id="quik_jump">
+    <li class="change_host_li"><a href="/hostinfo/addaccount/">Add Account</a> </li>
+    <li class="change_host_li"><a href="/hostinfo/upaccount/">Change Account</a> </li>
+    <li class="change_host_li"><a href="/hostinfo/delaccount/">Delete Account</a> </li>
+</ul>
+
+{% if status %}
+        <p style="color: red">{{ status }}</p>
+{% endif %}
+    <br><br>
+    
+
+
+    <h4 style="color:green" >Please Input Follow Info</h4>
+    <form id="update_account_form" method="post" action="/hostinfo/addaccount/">
+            {% csrf_token %}
+        <!-- select account -->
+        <div id="select_account">
+            <table>
+                <tr>
+                    <td class="input_nmae">Host Name:</td>
+                    <td class="input"><input type="text" name="host_name" id=""></td>
+                    <td class="input_nmae"> Account Name: </td>
+                    <td class="input"><input type="text" name="account_name" id=""></td>
+                </tr>
+                <tr>
+                        <td class="input_nmae">Account Type: </td>
+                        <td class="input">
+                                <select name="account_type" id="account_type">
+                                        <option value="os" selected="selected">OS</option>
+                                        <option value="mysql" >MySQL</option>
+                                        <option value="redis" >Redis</option>
+                                        <option value="tomcat" >Tomcat</option>
+                                        <option value="nginx" >Nginx</option>
+                                        <option value="others" >Others</option>
+                                </select>
+                        </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="account_data">
+            <table>
+            <tr>
+                <td class="show_name"> Host Name: </td> 
+                <td> <input class="left" type="text" name="new_host_name"></td>
+                <td class="show_name">Account Type: </td> 
+                <td>
+                    <select name="new_account_type" id="account_type">
+                        <option value="os" selected="selected">OS</option>
+                        <option value="mysql" >MySQL</option>
+                        <option value="redis" >Redis</option>
+                        <option value="tomcat" >Tomcat</option>
+                        <option value="nginx" >Nginx</option>
+                        <option value="others" >Others</option>
+                    </select>
+                
+                </td>
+            </tr>
+            <tr>
+                <td class="show_name">Account Name: </td>
+                <td><input class="left" type="text" name="new_account_name"></td>
+                <td class="show_name">Account Password: </td> 
+                <td><input class="right" type="text" name="new_account_passwd"></td>
+            </tr>
+            <tr>
+                <td class="show_name">Account Comment:  </td>
+                <td> <input class="left" type="text" name="new_account_comment"></td>
+            </tr>
+            </table>
+        </div>
+
+        <input type="button" class="change_account_btn" value="Update Account" onclick="update_account()">
+        <input type="button" class="change_account_btn" value="Delete Account" onclick="delete_account()">
+
+        {% comment %} <p>
+            <input style="margin-left: 35px; font-size: 20px" type="submit" value="Submit">
+        </p> {% endcomment %}
+    </form>
+
+    <script type="text/javascript">
+
+    	var update_account_form = document.getElementById("update_account_form");
+		function update_account(){
+    		//alert( "asas");
+    		update_account_form.action = "/hostinfo/upaccount/";
+    		update_account_form.submit();
+    	};
+    	function delete_account(){
+    		update_account_form.action="/hostinfo/delaccount/";
+    		update_account_form.submit();
+    	}
+	</script>
+
+
+{% endblock %}

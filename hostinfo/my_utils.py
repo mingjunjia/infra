@@ -8,10 +8,12 @@ def getHostsID(host_name):
     """
     """
     try:
-        host_id =  md.Hosts.objects.get(host_name=host_name).id
+        host_id =  md.Hosts.objects.get(host_name=host_name)
     except Exception,e:
         return False
 
     return host_id
+
+    
     
     

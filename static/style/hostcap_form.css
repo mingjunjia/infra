@@ -1,5 +1,5 @@
 
-/*----------------- for add_account_form.html ---------------------------*/
+/*----------------- for add_cap_form.html ---------------------------*/
 
 #quik_jump{
     margin: 50px;
@@ -30,50 +30,50 @@
 .show_name{
     text-align: right;
 }
-#addaccount_form td{
+#addcap_form td{
     margin-bottom: 0px;
     margin-top: 0px;
     padding: 10px;
 }
-#addaccount_form tr{
+#addcap_form tr{
     height: 40px;
 }
-#addaccount_form td input{
+#addcap_form td input{
     width: 300px;
     height: 25px;
 }
-#addaccount_form td select{
+#addcap_form td select{
     width: 305px;
     height: 30px;
     padding: 0px;
 }
 
-/*---------------------- for update_account_form.html --------------------------------*/
+/*---------------------- for update_cap_form.html --------------------------------*/
 
-#select_account, #account_data{
+#select_cap, #cap_data{
     border: #000000 1px solid;
     margin: 20px;
     width: 100%;
 }
 
-#select_account td, #account_data td{
+#select_cap td, #cap_data td{
     margin-bottom: 0px;
     margin-top: 0px;
     padding: 10px;
 }
-#select_account tr, #account_data tr{
+#select_cap tr, #cap_data tr{
     height: 40px;
 }
-#select_account td input, #account_data td input{
+#select_cap td input, #cap_data td input{
     width: 300px;
     height: 25px;
 }
-#select_account td select, #account_data td select{
+#select_cap td select, #cap_data td select{
     width: 305px;
     height: 30px;
     padding: 0px;
 }
 
-.change_account_btn {
+.change_cap_btn {
     margin: 50px;
 }

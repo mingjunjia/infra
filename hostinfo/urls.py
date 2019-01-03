@@ -26,4 +26,13 @@ urlpatterns = [
     url(r'delete/', views.deleteHost),
     url(r'detail/', views.showHost),
     url(r'addaccount/', views.addAccount),
+    url(r'upaccount/', views.updateAccount),
+    url(r'delaccount/', views.deleteAccount),
+    url(r'addcap/', views.addHostCap),
+    url(r'upcap/', views.updateHostCap),
+    url(r'delcap/', views.deleteHostCap),
+    url(r'addhw/', views.addHWSpec),
+    url(r'uphw/', views.updateHWSpec),
+    url(r'delhw/', views.deleteHWSpec),
+
 ]

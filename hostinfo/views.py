@@ -137,14 +137,14 @@ def addAccount(request):
 
 def updateAccount(request):
     if request.method == "GET":
-        return render(request, "hostinfo/account_passwd_form.html")
+        return render(request, "hostinfo/update_account_form.html")
 
     fields_l =  ["account_name", "host_name", "account_type"]
     fields_d = {}
 
     for i in fields_l:
         if i not in request.POST or request.POST[i] == "":
-            return render(request, "hostinfo/account_passwd_form.html", {"status": "Host Name and account Name and account Type is required."})
+            return render(request, "hostinfo/update_account_form.html", {"status": "Host Name and account Name and account Type is required."})
         else:
             fields_d.update({i:request.POST[i]})
 
@@ -153,7 +153,7 @@ def updateAccount(request):
         del(fields_d["host_name"])
         fields_d.update({"host_name_id":old_host_id})
     else:
-        return render(request, "hostinfo/account_passwd_form.html", {"status": "Host not exist."})
+        return render(request, "hostinfo/update_account_form.html", {"status": "Host not exist."})
 
 
 
@@ -166,7 +166,7 @@ def updateAccount(request):
             update_fields_d.update({j[4:]:request.POST[j]})
     
     if cnt == 0:
-        return render(request, "hostinfo/account_passwd_form.html", {"status":"nothing to update, not fields"})
+        return render(request, "hostinfo/update_account_form.html", {"status":"nothing to update, not fields"})
 
     if "host_name" in update_fields_d:
         try:
@@ -174,11 +174,184 @@ def updateAccount(request):
             del(update_fields_d["host_name"])
             update_fields_d.update({"host_name_id":host_id})
         except Exception,e:
-            return render(request, "hostinfo/account_passwd_form.html", {"status":"Failed, the host not exist on hosts: "+ str(e)})
+            return render(request, "hostinfo/update_account_form.html", {"status":"Failed, the host not exist on hosts: "+ str(e)})
 
     try:
-        md.accountPasswd.objects.filter(**fields_d).update(**update_fields_d)
+        md.AccountPasswd.objects.filter(**fields_d).update(**update_fields_d)
     except Exception,e:
-        return render(request, "hostinfo/account_passwd_form.html", {"status": "update Failed : "+str(e)})
+        return render(request, "hostinfo/update_account_form.html", {"status": "update Failed : "+str(e)})
     
-    return render(request, "hostinfo/account_passwd_form.html", {"status": "Success update."})
+    return render(request, "hostinfo/update_account_form.html", {"status": "Success update."})
+
+def deleteAccount(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/update_account_form.html")
+
+    fields_l =  ["account_name", "host_name", "account_type"]
+    fields_d = {}
+
+    for i in fields_l:
+        if i not in request.POST or request.POST[i] == "":
+            return render(request, "hostinfo/update_account_form.html", {"status": "Host Name and account Name and account Type is required."})
+        else:
+            fields_d.update({i:request.POST[i]})
+
+    if my.getHostsID(fields_d["host_name"]):
+        old_host_id = my.getHostsID(fields_d["host_name"])
+        del(fields_d["host_name"])
+        fields_d.update({"host_name_id":old_host_id})
+    else:
+        return render(request, "hostinfo/update_account_form.html", {"status": "Host not exist."})
+
+    try:
+        md.AccountPasswd.objects.get(**fields_d).delete()
+    except Exception,e:
+        return render(request, "hostinfo/update_account_form.html", {"status": "Delete Failed: account not exist:"+str(e)})
+
+    return render(request, "hostinfo/update_account_form.html", {"status": "Success Delete."})
+
+
+def addHostCap(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/add_hostcap_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/add_hostcap_form.html", {"status":"Failed.Host Name is required."})
+
+    if my.getHostsID(request.POST["host_name"]):
+        host_name_id = my.getHostsID(request.POST["host_name"])
+    else:
+        return render(request, "hostinfo/add_hostcap_form.html", {"status":"the host not exist."})
+
+    fields_l =  ["mem_size", "cpu_num", "rootfs_size", "disk_desc", "nfs_desc", "host_comment"]
+    fields_d = {}
+
+    for i in fields_l:
+        if i in request.POST and request.POST[i] != "":
+            fields_d.update({i:request.POST[i]})
+    fields_d.update({"host_name_id":host_name_id})
+
+    try:
+        rcd = md.HostCap(**fields_d)
+        rcd.save()
+    except Exception,e:
+        return render(request, "hostinfo/add_hostcap_form.html", {"status":"Add Failed,"+ str(e)})
+
+    return render(request, "hostinfo/add_hostcap_form.html", {"status": "Success Add."})
+
+
+def updateHostCap(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/update_cap_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/update_cap_form.html", {"status":"Failed.Host Name is required."})
+
+    fields_l =  ["mem_size", "cpu_num", "rootfs_size", "disk_desc", "nfs_desc", "host_comment"]
+    fields_d = {}
+
+    for i in fields_l:
+        if i in request.POST and request.POST[i] != "":
+            fields_d.update({i:request.POST[i]})
+    
+
+    if "new_host_name" in request.POST and request.POST["new_host_name"] != "":
+        if my.getHostsID(request.POST["new_host_name"]):
+            new_host_name_id = my.getHostsID(request.POST["new_host_name"])
+            fields_d.update({"host_name_id":new_host_name_id})
+        else:
+            return render(request, "hostinfo/update_cap_form.html", {"status":"the new host not exist."})
+
+    try:
+        md.HostCap.objects.filter(host_name_id = md.Hosts.objects.get(host_name =\
+                     request.POST["host_name"])).update(**fields_d)
+    except Exception as e:
+        return render(request, "hostinfo/update_cap_form.html", {"status":"Failed.Host not exist \
+                                                                    in hosts or hostcap"+ str(e)})
+
+    return render(request, "hostinfo/update_cap_form.html", {"status":"Update Success."})
+
+def deleteHostCap(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/update_cap_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/update_cap_form.html", {"status":"Failed.Host Name is required."})
+
+    try:
+        md.HostCap.objects.get(host_name_id = md.Hosts.objects.get(host_name = request.POST["host_name"])).delete()
+    except Exception as e:
+        return render(request, "hostinfo/update_cap_form.html", {"status":"Delete Failed.Host not exist in \
+                                            hosts or hostcap"+ str(e)})
+    return render(request, "hostinfo/update_cap_form.html", {"status":"Delete Success."})
+    
+
+def addHWSpec(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/add_hwspec_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/add_hwspec_form.html", {"status":"Failed.Host Name is required."})
+
+    if my.getHostsID(request.POST["host_name"]):
+        host_name_id = my.getHostsID(request.POST["host_name"])
+    else:
+        return render(request, "hostinfo/add_hwspec_form.html", {"status":"the host not exist."})
+
+    fields_l =  ["cpu_spec", "mem_spec", "host_model", "host_serial_num", "host_comment"]
+    fields_d = {}
+
+    for i in fields_l:
+        if i in request.POST and request.POST[i] != "":
+            fields_d.update({i:request.POST[i]})
+    fields_d.update({"host_name_id":host_name_id})
+
+    try:
+        rcd = md.HWSpec(**fields_d)
+        rcd.save()
+    except Exception,e:
+        return render(request, "hostinfo/add_hwspec_form.html", {"status":"Add Failed,"+ str(e)})
+
+    return render(request, "hostinfo/add_hwspec_form.html", {"status": "Success Add."})
+
+def updateHWSpec(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/update_hwspec_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/update_hwspec_form.html", {"status":"Failed.Host Name is required."})
+
+    fields_l =  ["cpu_spec", "mem_spec", "host_model", "host_serial_num", "host_comment"]
+    fields_d = {}
+
+    for i in fields_l:
+        if i in request.POST and request.POST[i] != "":
+            fields_d.update({i:request.POST[i]})
+    
+
+    if "new_host_name" in request.POST and request.POST["new_host_name"] != "":
+        if my.getHostsID(request.POST["new_host_name"]):
+            new_host_name_id = my.getHostsID(request.POST["new_host_name"])
+            fields_d.update({"host_name_id":new_host_name_id})
+        else:
+            return render(request, "hostinfo/update_hwspec_form.html", {"status":"the new host not exist."})
+
+    try:
+        md.HWSpec.objects.filter(host_name_id = md.Hosts.objects.get(host_name =\
+                     request.POST["host_name"])).update(**fields_d)
+    except Exception as e:
+        return render(request, "hostinfo/update_hwspec_form.html", {"status":"Failed.Host not exist \
+                                                                    in hosts or hostcap"+ str(e)})
+
+    return render(request, "hostinfo/update_hwspec_form.html", {"status":"Update Success."})
+
+def deleteHWSpec(request):
+    if request.method == "GET":
+        return render(request, "hostinfo/update_hwspec_form.html")
+    if "host_name" not in request.POST or request.POST["host_name"] == "":
+        return render(request, "hostinfo/update_hwspec_form.html", {"status":"Failed.Host Name is required."})
+
+    try:
+        md.HWSpec.objects.get(host_name_id = md.Hosts.objects.get(host_name = request.POST["host_name"])).delete()
+    except Exception as e:
+        return render(request, "hostinfo/update_hwspec_form.html", {"status":"Delete Failed.Host not exist in \
+                                            hosts or hostcap"+ str(e)})
+    return render(request, "hostinfo/update_hwspec_form.html", {"status":"Delete Success."})
+    
+
+    
